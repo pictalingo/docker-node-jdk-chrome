@@ -37,12 +37,14 @@ ENV MAVEN_HOME /usr/share/maven
 
 VOLUME /root/.m2
 
-# Install node 15
-RUN set -x \
-    && curl -sL https://deb.nodesource.com/setup_15.x | bash - \
-    && apt-get install -y \
-        nodejs \
-    && npm install -g npm@latest yarn@latest
+# Install node 16
+RUN curl -sL https://deb.nodesource.com/setup_14.x | bash -
+RUN apt-get update
+
+RUN apt-get install -y nodejs
+
+RUN npm install -g npm@next
+RUN npm install -g yarn@latest
 
 # Install Chrome
 RUN echo 'deb http://dl.google.com/linux/chrome/deb/ stable main' > /etc/apt/sources.list.d/chrome.list
